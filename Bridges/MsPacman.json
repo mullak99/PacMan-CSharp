@@ -1,0 +1,117 @@
+{
+	"name": "Ms Pacman",
+	"parameters": [
+		{
+			"name": "PacmanSpeed",
+			"rangeMin": -3,
+			"rangeMax": 5,
+			"rangeAccuracy": 10,
+			"minimise": "ignore", //"maximise" to maximise, "ignore" to ignore, "minimise" to minimise
+			"weight": 1,
+			"custom":{
+				"index": 0,
+			},
+			"enabled": true,
+		},
+		{
+			"name": "Ghost1Speed",
+			"rangeMin": -3,
+			"rangeMax": 5,
+			"rangeAccuracy": 10,
+			"minimise": "minimise",
+			"weight": 1,
+			"custom":{
+				"index": 1,
+			},
+			"enabled": true,
+		},
+		{
+			"name": "Ghost2Speed",
+			"rangeMin": -3,
+			"rangeMax": 5,
+			"rangeAccuracy": 10,
+			"minimise": "minimise",
+			"weight": 1,
+			"custom":{
+				"index": 3,
+			},
+			"enabled": false,
+		}
+	],
+	//"metrics": {
+	//	"Scores" : {
+	//		"type": "List",
+	//	},
+	//	"OtherMetric" : {
+	//		"type": "Double",
+	//	},
+	//},
+	"metrics": [
+		{
+			"name": "Scores",
+			"type": "List",
+		},
+		{
+			"name": "OtherMetric",
+			"type": "Double",
+		}
+	],
+	"evaluators": [
+		{
+			"name": "ScoreAverageEval",
+			"type": "AverageEvaluator",
+			"metric": "Scores",
+			"target": 1500,
+			"weight": 5,
+			"enabled": true,
+		},
+		{
+			"name": "ScoreMedianEval",
+			"type": "MedianEvaluator",
+			"metric": "Scores",
+			"target": 1500,
+			"weight": 5,
+			"enabled": false,
+		},
+		{
+			"name": "SomethingElse",
+			"type": "AverageEvaluator",
+			"metric": "OtherMetric",
+			"target": 1500,
+			"weight": 5,
+			"enabled": false,
+		},
+	],
+	"gaparams": {
+		"Par_MaxGenerations": 100000,
+		"Par_GenCountBeforeRefresh": 0,
+		"Par_IslandClusters": 1,
+		"Par_MaxPopMembers": 20,
+		"Par_Seed": 10002,
+		"Par_KeepEliteRatio": 0.15,
+		"Par_KeepRandRatio": 0.0,
+		"Par_MutateRatio": 0.5,
+		"Par_CrossoverRatio": 0.25,
+		"Par_TournamentSize": 6,
+		"extra_MutationChance": 0.5,
+		"extra_use_predictor": true,
+		"string_PredictorType": "NeuralNetworkPredictor",
+		"extra_Predictor_HiddenLayerCount": 18,
+		"extra_Predictor_MaxTrainingData": 100,
+		"extra_Predictor_MinTrainingData": 100,
+		"extra_Predictor_TrainingEpochs": 100,
+	},
+	"bridge": {
+		"type": "remote",
+		"server": "localhost",
+		"port": "5672",
+		"username": "",
+		"password": "",
+		//"type": "local",
+		"executable": "F:/GitHub/PacMan-CSharp/Binaries/PacmanBalanceBridge.exe \"%0\" \"%1\" \"%2\"", //%0 = path to this json, %1 = randseed, %2 = params
+	},
+	"custom": {
+		"AIAgent": "LucPacScripted",
+		"NumberOfGames": 20,
+	}
+}
