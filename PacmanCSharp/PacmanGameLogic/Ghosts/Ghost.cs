@@ -242,6 +242,11 @@ namespace Pacman.GameLogic.Ghosts
 			}
 		}
 
+		protected float CalculateDistanceToPacman(Direction d)
+		{
+			return GameState.Map.GetNode(X, Y).GetNeighbour(d).DistanceToNode(GameState.Pacman.Node);
+		}
+
 		private void evade() {
 			MoveRandom();
 		}
@@ -277,6 +282,18 @@ namespace Pacman.GameLogic.Ghosts
 				NextDirection = d3;
 			else if( Direction != InverseDirection(d4) && checkDirection(d4) )
 				NextDirection = d4;
+		}
+
+		protected void GoDirectionByPreference(DirectionDistance[] directionsByPref, bool limitBouncyMovement = false)
+		{
+			foreach (DirectionDistance d in directionsByPref)
+				if (PossibleDirections().Contains(d.Direction))
+				{
+					if (limitBouncyMovement && Direction == InverseDirection(d.Direction)) continue; // This is similar to MoveInFavoriteDirection
+
+					NextDirection = d.Direction;
+					return;
+				}
 		}
 
 		protected void MoveAsRed() {

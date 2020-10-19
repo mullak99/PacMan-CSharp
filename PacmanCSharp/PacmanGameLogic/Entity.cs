@@ -449,4 +449,26 @@ namespace Pacman.GameLogic
 	}
 
 	public enum Direction { Up = 0, Down = 1, Left = 2, Right = 3, None = 5, Stall = 4 };
+
+	public class DirectionDistance
+	{
+		Direction _direction;
+		float _distance;
+
+		public DirectionDistance(Direction direction, float distance)
+		{
+			_direction = direction;
+			_distance = distance;
+		}
+
+		public Direction Direction
+		{
+			get { return _direction; }
+		}
+
+		public float Distance
+		{
+			get { return _distance; }
+		}
+	}
 }

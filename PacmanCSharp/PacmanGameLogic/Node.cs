@@ -122,6 +122,11 @@ namespace Pacman.GameLogic
 			return Math.Abs(X - node.X) + Math.Abs(Y - node.Y);
 		}
 
+		public float DistanceToNode(Node node)
+		{
+			return (float)Math.Sqrt(Math.Pow(X - node.X, 2) + Math.Pow(Y - node.Y, 2));
+		}
+
 		public enum NodeType { Pill, PowerPill, None, Wall };
         [Serializable]
 		public class PathInfo

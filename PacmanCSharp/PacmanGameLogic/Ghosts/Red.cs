@@ -52,32 +52,12 @@ namespace Pacman.GameLogic.Ghosts
 			 * it wouldnt really be a Moving Target Search since the fastest path would need to be ignored for a few movement cycles.
 			 */
 			if (useCustomMove)
-				GoDirectionByPreference(directions);
+				GoDirectionByPreference(directions, true);
 			else
 				MoveInFavoriteDirection(directions[0].Direction, directions[1].Direction, directions[2].Direction, directions[3].Direction);
 
 			base.Move();
 		}
-
-		private float CalculateDistanceToPacman(Direction d)
-        {
-			return DistanceBetweenNode(GameState.Map.GetNode(X, Y).GetNeighbour(d), GameState.Pacman.Node);
-		}
-
-		private float DistanceBetweenNode(Node n1, Node n2)
-        {
-			return (float)Math.Sqrt(Math.Pow(n1.X - n2.X, 2) + Math.Pow(n1.Y - n2.Y, 2));
-		}
-
-		private void GoDirectionByPreference(DirectionDistance[] directionsByPref)
-        {
-			foreach (DirectionDistance d in directionsByPref)
-				if (PossibleDirections().Contains(d.Direction))
-                {
-					NextDirection = d.Direction;
-					return;
-                }
-        }
 
         #region ICloneable Members
 
@@ -96,26 +76,4 @@ namespace Pacman.GameLogic.Ghosts
 
         #endregion
     }
-
-	public class DirectionDistance
-	{
-		Direction _direction;
-		float _distance;
-
-		public DirectionDistance(Direction direction, float distance)
-        {
-			_direction = direction;
-			_distance = distance;
-        }
-
-		public Direction Direction
-        {
-			get { return _direction; }
-        }
-
-		public float Distance
-        {
-			get { return _distance; }
-        }
-	}
 }
