@@ -450,7 +450,7 @@ namespace Pacman.GameLogic
 
 	public enum Direction { Up = 0, Down = 1, Left = 2, Right = 3, None = 5, Stall = 4 };
 
-	public class DirectionDistance
+	public class DirectionDistance : IComparable<DirectionDistance>
 	{
 		Direction _direction;
 		float _distance;
@@ -469,6 +469,11 @@ namespace Pacman.GameLogic
 		public float Distance
 		{
 			get { return _distance; }
+		}
+
+		public int CompareTo(DirectionDistance other)
+		{
+			return _distance.CompareTo(other._distance);
 		}
 	}
 }

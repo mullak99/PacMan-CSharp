@@ -35,26 +35,18 @@ namespace Pacman.GameLogic.Ghosts
 			entered = true;
 		}
 
-		bool useCustomMove = true;
-		Direction[] possibleDirections = new Direction[] { Direction.Up, Direction.Right, Direction.Down, Direction.Left };
+		const bool MitigateBouncyMovement = true;
 		public override void Move() {
-			DirectionDistance[] directions = new DirectionDistance[4];
-
-			for (int i = 0; i < possibleDirections.Length; i++)
+			DirectionDistance[] directions = new DirectionDistance[PossibleDirections().Count];
+			
+			for (int i = 0; i < PossibleDirections().Count; i++)
 			{
-				Direction d = possibleDirections[i];
+				Direction d = PossibleDirections()[i];
 				directions[i] = new DirectionDistance(d, CalculateDistanceToPacman(d));
 			}
-			directions = directions.OrderBy(x => x.Distance).ToArray();
 
-			/* 
-			 * GoDirectionByPreference causes the ghost to have 'bouncy movement' when it gets in a corner. This could be solved, but 
-			 * it wouldnt really be a Moving Target Search since the fastest path would need to be ignored for a few movement cycles.
-			 */
-			if (useCustomMove)
-				GoDirectionByPreference(directions, true);
-			else
-				MoveInFavoriteDirection(directions[0].Direction, directions[1].Direction, directions[2].Direction, directions[3].Direction);
+			Array.Sort(directions);
+			GoDirectionByPreference(directions, MitigateBouncyMovement);
 
 			base.Move();
 		}
