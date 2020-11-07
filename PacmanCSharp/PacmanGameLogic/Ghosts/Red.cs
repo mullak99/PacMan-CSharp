@@ -35,7 +35,6 @@ namespace Pacman.GameLogic.Ghosts
 			entered = true;
 		}
 
-		const bool MitigateBouncyMovement = true;
 		public override void Move() {
 			DirectionDistance[] directions = new DirectionDistance[PossibleDirections().Count];
 			
@@ -46,7 +45,7 @@ namespace Pacman.GameLogic.Ghosts
 			}
 
 			Array.Sort(directions);
-			GoDirectionByPreference(directions, MitigateBouncyMovement);
+			GoDirectionByPreference(directions);
 
 			base.Move();
 		}

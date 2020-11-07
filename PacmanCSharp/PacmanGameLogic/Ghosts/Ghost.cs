@@ -284,13 +284,11 @@ namespace Pacman.GameLogic.Ghosts
 				NextDirection = d4;
 		}
 
-		protected void GoDirectionByPreference(DirectionDistance[] directionsByPref, bool limitBouncyMovement = false)
+		protected void GoDirectionByPreference(DirectionDistance[] directionsByPref)
 		{
 			foreach (DirectionDistance d in directionsByPref)
 				if (PossibleDirections().Contains(d.Direction))
 				{
-					if (limitBouncyMovement && Direction == InverseDirection(d.Direction)) continue; // This is similar to MoveInFavoriteDirection
-
 					NextDirection = d.Direction;
 					return;
 				}
