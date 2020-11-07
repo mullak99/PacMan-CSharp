@@ -244,7 +244,7 @@ namespace Pacman.GameLogic.Ghosts
 
 		protected float CalculateDistanceToPacman(Direction d)
 		{
-			return GameState.Map.GetNode(X, Y).GetNeighbour(d).DistanceToNode(GameState.Pacman.Node);
+			return GameState.Map.GetNode(X, Y).GetNeighbour(d).EuclideanDistance(GameState.Pacman.Node);
 		}
 
 		private void evade() {

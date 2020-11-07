@@ -122,7 +122,7 @@ namespace Pacman.GameLogic
 			return Math.Abs(X - node.X) + Math.Abs(Y - node.Y);
 		}
 
-		public float DistanceToNode(Node node)
+		public float EuclideanDistance(Node node)
 		{
 			return (float)Math.Sqrt(Math.Pow(X - node.X, 2) + Math.Pow(Y - node.Y, 2));
 		}
